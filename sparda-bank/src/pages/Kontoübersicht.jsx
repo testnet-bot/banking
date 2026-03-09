@@ -64,7 +64,23 @@ export default function Kontoübersicht({ goTo, openModal }) {
 
   return (
     <div className="page-animate">
-      {/* ...rest of your JSX content... */}
+      <div className="accounts-grid">
+        {accounts.map(acct => (
+          <AccountCard
+            key={acct.id}
+            acct={acct}
+            onClick={() => console.log(acct.id)}
+            onAction={action => console.log(action, acct.id)}
+          />
+        ))}
+      </div>
+
+      <h3>Letzte Transaktionen</h3>
+      <div className="transactions-list">
+        {recentTx.map(tx => (
+          <TransactionItem key={tx.id} tx={tx} />
+        ))}
+      </div>
     </div>
   )
 }
