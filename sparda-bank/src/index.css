@@ -21,6 +21,7 @@
   --sidebar-w: 240px;
   --header-h: 60px;
   --banner-h: 28px;
+  --bottom-nav-h: 60px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,10 +32,11 @@ body {
   color: var(--gray-900);
   background: var(--gray-50);
   min-height: 100vh;
+  -webkit-text-size-adjust: 100%;
 }
 
 button { font-family: var(--font); cursor: pointer; }
-input, select, textarea { font-family: var(--font); }
+input, select, textarea { font-family: var(--font); font-size: 16px; } /* 16px prevents iOS zoom */
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
@@ -47,3 +49,31 @@ input, select, textarea { font-family: var(--font); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .page-animate { animation: fadeSlideIn 0.22s ease both; }
+
+/* Sidebar overlay backdrop */
+.sidebar-backdrop {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 85;
+}
+.sidebar-backdrop.open { display: block; }
+
+/* ── Mobile overrides ── */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-w: 0px;
+    --header-h: 56px;
+  }
+
+  /* Bottom nav on mobile */
+  .bottom-nav {
+    display: flex !important;
+  }
+
+  /* Hide greeting text on mobile */
+  .header-greeting { display: none !important; }
+
+  /* Shrink header action labels */
+  .header-btn-label { display: none !important; }
+}
